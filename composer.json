@@ -1,0 +1,21 @@
+{
+    "name": "ship/hull",
+    "description": "Ship framework PSR7 HTTP implementation.",
+    "type": "library",
+    "license": "MIT",
+
+    "require": {
+        "psr/http-message": "^1.0"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Ship\\Hull\\": "src/",
+            "Tests\\": "tests/"
+        }
+    },
+
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    }
+}
