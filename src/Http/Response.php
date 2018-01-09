@@ -28,7 +28,7 @@ class Response extends Message implements ResponseInterface
 
         //Message
         $this->headers = $headers !== null ? $headers : [];
-        $this->body = $body !== null ? $body : new Stream(fopen('\\temp', 'r+'));
+        $this->body = $body !== null ? $body : new Stream(fopen('php://memory', 'r+'));
 
         if ($protocolVersion === null) {
             $this->protocolVersion = isset($_SERVER['SERVER_PROTOCOL']) ? explode('/', $_SERVER['SERVER_PROTOCOL'])[1] : '1.1';

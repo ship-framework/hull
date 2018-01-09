@@ -28,7 +28,8 @@ class Stream implements StreamInterface
             'x',
             'x+',
             'c',
-            'c+'
+            'c+',
+            'w+b'
         ]
     ];
 
