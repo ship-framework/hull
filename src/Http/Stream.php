@@ -85,7 +85,7 @@ class Stream implements StreamInterface
     public function detach()
     {
         unset($this->stream);
-        return $this->stream;
+        return isset($this->stream) ? $this->stream : null;
     }
 
     /**
@@ -108,11 +108,11 @@ class Stream implements StreamInterface
     {
         $result = ftell($this->stream);
 
-        if (!$result) {
+        if ($result !== false) {
+            return $result;
+        } else {
             throw new \RuntimeException('Unable to get the stream position.');
         }
-
-        return $result;
     }
 
     /**
@@ -249,6 +249,10 @@ class Stream implements StreamInterface
      */
     public function getContents()
     {
+        if (!isset($this->stream)) {
+            throw new \RuntimeException('Unable to read contents of undefined stream.');
+        }
+
         $result = stream_get_contents($this->stream);
 
         if (!$result) {

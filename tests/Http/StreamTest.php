@@ -10,7 +10,7 @@ final class StreamTest extends \PHPUnit_Framework_TestCase
 
     public function __construct()
     {
-        $stream = new Stream(fopen(__FILE__, 'r'));
+        $stream = new Stream(fopen('\\temp', 'r+'));
         $this->stream = $stream;
     }
 
@@ -24,22 +24,21 @@ final class StreamTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->stream->getSize() > 0);
     }
 
-    //TODO
     public function testClose()
     {
-        $this->assertEquals('a', 'b');
+        $this->stream->close();
+        $this->setExpectedException('RuntimeException');
+        $this->stream->getContents();
     }
 
-    //TODO
     public function testDetach()
     {
-        $this->assertEquals('a', 'b');
+        $this->assertEquals(null, $this->stream->detach());
     }
 
-    //TODO
     public function testEof()
     {
-        $this->assertEquals('a', 'b');
+        $this->assertEquals(false, $this->stream->eof());
     }
 
     public function testIsSeekable()
@@ -47,27 +46,27 @@ final class StreamTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->stream->isSeekable());
     }
 
-    //TODO
      public function testSeek()
     {
-        $this->assertEquals('a', 'b');
+        $this->stream->seek(1);
+        $this->assertEquals(1, $this->stream->tell());
     }
 
-    //TODO
     public function testRewind()
     {
-        $this->assertEquals('a', 'b');
+        $this->stream->seek(1);
+        $this->stream->rewind();
+        $this->assertEquals(0, $this->stream->tell());
     }
 
     public function testIsWritable()
     {
-        $this->assertFalse($this->stream->isWritable());
+        $this->assertTrue($this->stream->isWritable());
     }
 
-    //TODO
     public function testWrite()
     {
-        $this->assertEquals('a', 'b');
+        $this->assertEquals(6, $this->stream->write('foobar'));
     }
 
     public function testIsReadable()
